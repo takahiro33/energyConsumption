@@ -205,7 +205,7 @@ int main (int argc, char *argv[])
 	uint32_t aps = 3;			     			// Number of wireless access nodes in a sector
 	uint32_t trainAp = 2;			      		// Number of train wagons
 	uint32_t users = 4;			      			// Number of mobile terminals
-	uint32_t servers = 3;			      		// Number of servers in the network
+	uint32_t servers = 1;			      		// Number of servers in the network
 	uint32_t xaxis = 300;                       // Size of the X axis
 	uint32_t yaxis = 300;                       // Size of the Y axis
 	uint32_t NumberOfContents = 1000;				// Number of Contents
@@ -233,6 +233,7 @@ int main (int argc, char *argv[])
 
 	CommandLine cmd;
 	cmd.AddValue ("mobile", "Number of mobile terminals in simulation", users);
+	cmd.AddValue ("train", "Number of Train APs in simulation", trainAp);
 	cmd.AddValue ("servers", "Number of servers in the simulation", servers);
 	cmd.AddValue ("results", "Directory to place results", results);
 	cmd.AddValue ("contents", "Number of Contents", NumberOfContents);
@@ -292,7 +293,7 @@ int main (int argc, char *argv[])
 	for(int i = 0; i < users + trainAp*2; i++)
 	{
 		if(i < users){
-			mobileXpos.push_back((50 * i / users));
+			mobileXpos.push_back((60 * i / users));
 			mobileYpos.push_back(100);
 		} else if(i < users + trainAp){
 			mobileXpos.push_back(30*(i-users));
@@ -329,6 +330,10 @@ int main (int argc, char *argv[])
 	NodeContainer centralContainer;
 	centralContainer.Create (sectors);
 
+	// Wireless access Nodes
+	NodeContainer wirelessContainer;
+	wirelessContainer.Create (wnodes);
+
 	// TainAP Nodes
 	NodeContainer trainApNodes;
 	trainApNodes.Create (trainAp);
@@ -336,10 +341,6 @@ int main (int argc, char *argv[])
 	// TainAP Nodes
 	NodeContainer trainApBridgeNodes;
 	trainApBridgeNodes.Create (trainAp);
-
-	// Wireless access Nodes
-	NodeContainer wirelessContainer;
-	wirelessContainer.Create (wnodes);
 
 	// User NOdes
 	NodeContainer userNodes;
@@ -816,6 +817,9 @@ int main (int argc, char *argv[])
 
 		CsmaHelper csma;
 		NetDeviceContainer csmaDevices;
+		csma.SetChannelAttribute ("DataRate",
+		                          DataRateValue (DataRate (5000000)));
+		csma.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (2)));
 		csmaDevices = csma.Install(trainApNodes);
 		csmaDevices = csma.Install(trainApBridgeNodes);
 /*
