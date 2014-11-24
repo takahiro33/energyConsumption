@@ -1,151 +1,208 @@
-# project template (0.1) configured on Mon Nov 10 19:25:26 2014 by
-# waf 1.7.9 (abi 98, python 20706f0 on linux2)
-# using ./waf configure --boost-libs=/usr/lib/x86_64-linux-gnu --boost-includes=/usr/include/boost
+# project template (0.1) configured on Tue Nov 25 02:04:56 2014 by
+# waf 1.7.9 (abi 98, python 20703f0 on linux2)
+# using ./waf configure
 #
 ----------------------------------------
 Setting top to
-/home/miyamoto/ndnSim/energyConsumption
+/home/user1/ndnSIM/energyConsumption
 ----------------------------------------
 Setting out to
-/home/miyamoto/ndnSim/energyConsumption/build
+/home/user1/ndnSIM/energyConsumption/build
 ----------------------------------------
 Checking for 'g++' (c++ compiler)
-find program=['g++', 'c++'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='CXX' -> '/usr/bin/g++'
-find program=['ar'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='AR' -> '/usr/bin/ar'
+find program=['g++', 'c++'] paths=['/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'] var='CXX' -> '/usr/bin/g++'
+find program=['ar'] paths=['/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'] var='AR' -> '/usr/bin/ar'
 /usr/bin/g++
 ----------------------------------------
 Checking boost includes
-1_54
+1_49
 ----------------------------------------
 Checking boost libs
-Found the boost path in /usr/lib/x86_64-linux-gnu with the libraries:
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.a
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.a
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_context.a
-    /usr/lib/x86_64-linux-gnu/libboost_context.so
-    /usr/lib/x86_64-linux-gnu/libboost_context.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.a
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.a
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_exception.a
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.a
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_graph.a
-    /usr/lib/x86_64-linux-gnu/libboost_graph.so
-    /usr/lib/x86_64-linux-gnu/libboost_graph.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.a
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.a
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_locale.a
-    /usr/lib/x86_64-linux-gnu/libboost_locale.so
-    /usr/lib/x86_64-linux-gnu/libboost_locale.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_log.a
-    /usr/lib/x86_64-linux-gnu/libboost_log.so
-    /usr/lib/x86_64-linux-gnu/libboost_log.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.a
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py27.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py27.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py27.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py34.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py34.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py34.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python.so
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.a
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.a
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.so
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_python-py27.a
-    /usr/lib/x86_64-linux-gnu/libboost_python-py27.so
-    /usr/lib/x86_64-linux-gnu/libboost_python-py27.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_python-py34.a
-    /usr/lib/x86_64-linux-gnu/libboost_python-py34.so
-    /usr/lib/x86_64-linux-gnu/libboost_python-py34.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_python.a
-    /usr/lib/x86_64-linux-gnu/libboost_python.so
-    /usr/lib/x86_64-linux-gnu/libboost_random.a
-    /usr/lib/x86_64-linux-gnu/libboost_random.so
-    /usr/lib/x86_64-linux-gnu/libboost_random.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_regex.a
-    /usr/lib/x86_64-linux-gnu/libboost_regex.so
-    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.a
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.so
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_signals.a
-    /usr/lib/x86_64-linux-gnu/libboost_signals.so
-    /usr/lib/x86_64-linux-gnu/libboost_signals.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_system.a
-    /usr/lib/x86_64-linux-gnu/libboost_system.so
-    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
-    /usr/lib/x86_64-linux-gnu/libboost_thread.a
-    /usr/lib/x86_64-linux-gnu/libboost_thread.so
-    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_timer.a
-    /usr/lib/x86_64-linux-gnu/libboost_timer.so
-    /usr/lib/x86_64-linux-gnu/libboost_timer.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.a
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_wave.a
-    /usr/lib/x86_64-linux-gnu/libboost_wave.so
-    /usr/lib/x86_64-linux-gnu/libboost_wave.so.1.54.0
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.a
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so.1.54.0
-Trying pattern boost_system(-gcc[0-9]{0,3})+(-1_54)+
-Trying pattern boost_system(-1_54)+
-Trying pattern boost_system(-1_54)+
+Found the boost path in /usr/lib with the libraries:
+    /usr/lib/libboost_chrono-mt.a
+    /usr/lib/libboost_chrono-mt.so
+    /usr/lib/libboost_chrono.a
+    /usr/lib/libboost_chrono.so
+    /usr/lib/libboost_chrono.so.1.49.0
+    /usr/lib/libboost_date_time-mt.a
+    /usr/lib/libboost_date_time-mt.so
+    /usr/lib/libboost_date_time.a
+    /usr/lib/libboost_date_time.so
+    /usr/lib/libboost_date_time.so.1.49.0
+    /usr/lib/libboost_filesystem-mt.a
+    /usr/lib/libboost_filesystem-mt.so
+    /usr/lib/libboost_filesystem.a
+    /usr/lib/libboost_filesystem.so
+    /usr/lib/libboost_filesystem.so.1.49.0
+    /usr/lib/libboost_graph-mt.a
+    /usr/lib/libboost_graph-mt.so
+    /usr/lib/libboost_graph.a
+    /usr/lib/libboost_graph.so
+    /usr/lib/libboost_graph.so.1.49.0
+    /usr/lib/libboost_graph_parallel-mt.a
+    /usr/lib/libboost_graph_parallel-mt.so
+    /usr/lib/libboost_graph_parallel.a
+    /usr/lib/libboost_graph_parallel.so
+    /usr/lib/libboost_graph_parallel.so.1.49.0
+    /usr/lib/libboost_iostreams-mt.a
+    /usr/lib/libboost_iostreams-mt.so
+    /usr/lib/libboost_iostreams.a
+    /usr/lib/libboost_iostreams.so
+    /usr/lib/libboost_iostreams.so.1.49.0
+    /usr/lib/libboost_locale-mt.a
+    /usr/lib/libboost_locale-mt.so
+    /usr/lib/libboost_locale.a
+    /usr/lib/libboost_locale.so
+    /usr/lib/libboost_locale.so.1.49.0
+    /usr/lib/libboost_math_c99-mt.a
+    /usr/lib/libboost_math_c99-mt.so
+    /usr/lib/libboost_math_c99.a
+    /usr/lib/libboost_math_c99.so
+    /usr/lib/libboost_math_c99.so.1.49.0
+    /usr/lib/libboost_math_c99f-mt.a
+    /usr/lib/libboost_math_c99f-mt.so
+    /usr/lib/libboost_math_c99f.a
+    /usr/lib/libboost_math_c99f.so
+    /usr/lib/libboost_math_c99f.so.1.49.0
+    /usr/lib/libboost_math_c99l-mt.a
+    /usr/lib/libboost_math_c99l-mt.so
+    /usr/lib/libboost_math_c99l.a
+    /usr/lib/libboost_math_c99l.so
+    /usr/lib/libboost_math_c99l.so.1.49.0
+    /usr/lib/libboost_math_tr1-mt.a
+    /usr/lib/libboost_math_tr1-mt.so
+    /usr/lib/libboost_math_tr1.a
+    /usr/lib/libboost_math_tr1.so
+    /usr/lib/libboost_math_tr1.so.1.49.0
+    /usr/lib/libboost_math_tr1f-mt.a
+    /usr/lib/libboost_math_tr1f-mt.so
+    /usr/lib/libboost_math_tr1f.a
+    /usr/lib/libboost_math_tr1f.so
+    /usr/lib/libboost_math_tr1f.so.1.49.0
+    /usr/lib/libboost_math_tr1l-mt.a
+    /usr/lib/libboost_math_tr1l-mt.so
+    /usr/lib/libboost_math_tr1l.a
+    /usr/lib/libboost_math_tr1l.so
+    /usr/lib/libboost_math_tr1l.so.1.49.0
+    /usr/lib/libboost_mpi-mt.a
+    /usr/lib/libboost_mpi-mt.so
+    /usr/lib/libboost_mpi.a
+    /usr/lib/libboost_mpi.so
+    /usr/lib/libboost_mpi.so.1.49.0
+    /usr/lib/libboost_mpi_python-mt-py26.a
+    /usr/lib/libboost_mpi_python-mt-py26.so
+    /usr/lib/libboost_mpi_python-mt-py27.a
+    /usr/lib/libboost_mpi_python-mt-py27.so
+    /usr/lib/libboost_mpi_python-mt-py32.a
+    /usr/lib/libboost_mpi_python-mt-py32.so
+    /usr/lib/libboost_mpi_python-py26.a
+    /usr/lib/libboost_mpi_python-py26.so
+    /usr/lib/libboost_mpi_python-py26.so.1.49.0
+    /usr/lib/libboost_mpi_python-py27.a
+    /usr/lib/libboost_mpi_python-py27.so
+    /usr/lib/libboost_mpi_python-py27.so.1.49.0
+    /usr/lib/libboost_mpi_python-py32.a
+    /usr/lib/libboost_mpi_python-py32.so
+    /usr/lib/libboost_mpi_python-py32.so.1.49.0
+    /usr/lib/libboost_mpi_python.a
+    /usr/lib/libboost_mpi_python.so
+    /usr/lib/libboost_prg_exec_monitor-mt.a
+    /usr/lib/libboost_prg_exec_monitor-mt.so
+    /usr/lib/libboost_prg_exec_monitor.a
+    /usr/lib/libboost_prg_exec_monitor.so
+    /usr/lib/libboost_prg_exec_monitor.so.1.49.0
+    /usr/lib/libboost_program_options-mt.a
+    /usr/lib/libboost_program_options-mt.so
+    /usr/lib/libboost_program_options.a
+    /usr/lib/libboost_program_options.so
+    /usr/lib/libboost_program_options.so.1.49.0
+    /usr/lib/libboost_python-mt-py26.a
+    /usr/lib/libboost_python-mt-py26.so
+    /usr/lib/libboost_python-mt-py27.a
+    /usr/lib/libboost_python-mt-py27.so
+    /usr/lib/libboost_python-mt-py32.a
+    /usr/lib/libboost_python-mt-py32.so
+    /usr/lib/libboost_python-py26.a
+    /usr/lib/libboost_python-py26.so
+    /usr/lib/libboost_python-py26.so.1.49.0
+    /usr/lib/libboost_python-py27.a
+    /usr/lib/libboost_python-py27.so
+    /usr/lib/libboost_python-py27.so.1.49.0
+    /usr/lib/libboost_python-py32.a
+    /usr/lib/libboost_python-py32.so
+    /usr/lib/libboost_python-py32.so.1.49.0
+    /usr/lib/libboost_python.a
+    /usr/lib/libboost_python.so
+    /usr/lib/libboost_random-mt.a
+    /usr/lib/libboost_random-mt.so
+    /usr/lib/libboost_random.a
+    /usr/lib/libboost_random.so
+    /usr/lib/libboost_random.so.1.49.0
+    /usr/lib/libboost_regex-mt.a
+    /usr/lib/libboost_regex-mt.so
+    /usr/lib/libboost_regex.a
+    /usr/lib/libboost_regex.so
+    /usr/lib/libboost_regex.so.1.49.0
+    /usr/lib/libboost_serialization-mt.a
+    /usr/lib/libboost_serialization-mt.so
+    /usr/lib/libboost_serialization.a
+    /usr/lib/libboost_serialization.so
+    /usr/lib/libboost_serialization.so.1.49.0
+    /usr/lib/libboost_signals-mt.a
+    /usr/lib/libboost_signals-mt.so
+    /usr/lib/libboost_signals.a
+    /usr/lib/libboost_signals.so
+    /usr/lib/libboost_signals.so.1.49.0
+    /usr/lib/libboost_system-mt.a
+    /usr/lib/libboost_system-mt.so
+    /usr/lib/libboost_system.a
+    /usr/lib/libboost_system.so
+    /usr/lib/libboost_system.so.1.49.0
+    /usr/lib/libboost_test_exec_monitor-mt.a
+    /usr/lib/libboost_test_exec_monitor.a
+    /usr/lib/libboost_thread-mt.a
+    /usr/lib/libboost_thread-mt.so
+    /usr/lib/libboost_thread.a
+    /usr/lib/libboost_thread.so
+    /usr/lib/libboost_thread.so.1.49.0
+    /usr/lib/libboost_timer-mt.a
+    /usr/lib/libboost_timer-mt.so
+    /usr/lib/libboost_timer.a
+    /usr/lib/libboost_timer.so
+    /usr/lib/libboost_timer.so.1.49.0
+    /usr/lib/libboost_unit_test_framework-mt.a
+    /usr/lib/libboost_unit_test_framework-mt.so
+    /usr/lib/libboost_unit_test_framework.a
+    /usr/lib/libboost_unit_test_framework.so
+    /usr/lib/libboost_unit_test_framework.so.1.49.0
+    /usr/lib/libboost_wave-mt.a
+    /usr/lib/libboost_wave-mt.so
+    /usr/lib/libboost_wave.a
+    /usr/lib/libboost_wave.so
+    /usr/lib/libboost_wave.so.1.49.0
+    /usr/lib/libboost_wserialization-mt.a
+    /usr/lib/libboost_wserialization-mt.so
+    /usr/lib/libboost_wserialization.a
+    /usr/lib/libboost_wserialization.so
+    /usr/lib/libboost_wserialization.so.1.49.0
+Trying pattern boost_system(-gcc[0-9]{0,3})+(-1_49)+
+Trying pattern boost_system(-1_49)+
+Trying pattern boost_system(-1_49)+
 Trying pattern boost_system(-gcc[0-9]{0,3})+
 Trying pattern boost_system
-Found boost lib libboost_system.a
-Trying pattern boost_iostreams(-gcc[0-9]{0,3})+(-1_54)+
-Trying pattern boost_iostreams(-1_54)+
-Trying pattern boost_iostreams(-1_54)+
+Found boost lib libboost_system-mt.a
+Trying pattern boost_iostreams(-gcc[0-9]{0,3})+(-1_49)+
+Trying pattern boost_iostreams(-1_49)+
+Trying pattern boost_iostreams(-1_49)+
 Trying pattern boost_iostreams(-gcc[0-9]{0,3})+
 Trying pattern boost_iostreams
-Found boost lib libboost_iostreams.a
-Trying pattern boost_regex(-gcc[0-9]{0,3})+(-1_54)+
-Trying pattern boost_regex(-1_54)+
-Trying pattern boost_regex(-1_54)+
+Found boost lib libboost_iostreams-mt.a
+Trying pattern boost_regex(-gcc[0-9]{0,3})+(-1_49)+
+Trying pattern boost_regex(-1_49)+
+Trying pattern boost_regex(-1_49)+
 Trying pattern boost_regex(-gcc[0-9]{0,3})+
 Trying pattern boost_regex
-Found boost lib libboost_regex.a
+Found boost lib libboost_regex-mt.a
 ok
 ----------------------------------------
 Checking for boost linkage
@@ -158,12 +215,12 @@ int main() { boost::system::error_code c; }
 ['/usr/bin/g++', '-I/usr/include', '../test.cpp', '-c', '-o', 'test.cpp.1.o']
 [2/2] [33mcxxprogram: build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/test.cpp.1.o -> build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/testprog
 [0m
-['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/miyamoto/ndnSim/energyConsumption/build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/x86_64-linux-gnu', '-lboost_system', '-lboost_iostreams', '-lboost_regex']
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/user1/ndnSIM/energyConsumption/build/.conf_check_968fbcee789046a8c143bb4a6e302895/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lboost_system-mt', '-lboost_iostreams-mt', '-lboost_regex-mt']
 ok
 ----------------------------------------
 Checking for program pkg-config
 /usr/bin/pkg-config
-find program=['pkg-config'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='PKGCONFIG' -> '/usr/bin/pkg-config'
+find program=['pkg-config'] paths=['/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'] var='PKGCONFIG' -> '/usr/bin/pkg-config'
 ------------------------------------------
 Checking for pkg-config version >= '0.0.0'
 ['/usr/bin/pkg-config', '--atleast-pkgconfig-version=0.0.0']
@@ -189,7 +246,7 @@ yes
 ------------------------------------------
 Checking for ns3-applications
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-applications-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-applications-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-applications-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -213,7 +270,7 @@ yes
 ------------------------------------------
 Checking for ns3-aodv
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-aodv-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-aodv-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-aodv-optimized -lns3-dev-mesh-optimized -lns3-dev-point-to-point-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -231,47 +288,47 @@ to the PKG_CONFIG_PATH environment variable
 No package 'libns3-dev-brite-optimized' found
 
 not found
-from /home/miyamoto/ndnSim/energyConsumption: The configuration failed
+from /home/user1/ndnSIM/energyConsumption: The configuration failed
 ------------------------------------------
 Checking for ns3-buildings
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-buildings-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-buildings-optimized -lns3-dev-propagation-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-buildings-optimized -lns3-dev-propagation-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-click
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-click-optimized']
-out: -DNS3_CLICK -pthread -I/usr/include/ns3-dev -I/home/miyamoto/ndnSim/click/include  -Wl,-Bdynamic -L/home/miyamoto/ndnSim/click/ns -lns3-dev-click-optimized -lnsclick -ldl -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -DNS3_CLICK -pthread -I/usr/include/ns3-dev -I/home/user1/ndnSIM/click/include  -Wl,-Bdynamic -L/home/user1/ndnSIM/click/ns -lns3-dev-click-optimized -lnsclick -ldl -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-config-store
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-config-store-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-csma
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-csma-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-csma-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-csma-optimized -lns3-dev-applications-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-csma-layout
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-csma-layout-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-csma-layout-optimized -lns3-dev-csma-optimized -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-csma-layout-optimized -lns3-dev-netanim-optimized -lns3-dev-wimax-optimized -lns3-dev-lte-optimized -lns3-dev-uan-optimized -lns3-dev-spectrum-optimized -lns3-dev-buildings-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-point-to-point-optimized -lns3-dev-csma-optimized -lns3-dev-antenna-optimized -lns3-dev-applications-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-energy-optimized -lns3-dev-internet-optimized -lns3-dev-wifi-optimized -lns3-dev-bridge-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-dsdv
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-dsdv-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-dsdv-optimized -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-dsdv-optimized -lns3-dev-mesh-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-dsr
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-dsr-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-dsr-optimized -lns3-dev-internet-optimized -lns3-dev-wifi-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-dsr-optimized -lns3-dev-mesh-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -283,7 +340,7 @@ yes
 ------------------------------------------
 Checking for ns3-energy
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-energy-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-energy-optimized -lns3-dev-wifi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-energy-optimized -lns3-dev-internet-optimized -lns3-dev-wifi-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -295,7 +352,7 @@ yes
 ------------------------------------------
 Checking for ns3-flow-monitor
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-flow-monitor-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-flow-monitor-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-flow-monitor-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -307,13 +364,13 @@ yes
 ------------------------------------------
 Checking for ns3-lte
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-lte-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-lte-optimized -lns3-dev-spectrum-optimized -lns3-dev-buildings-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-point-to-point-optimized -lns3-dev-applications-optimized -lns3-dev-csma-optimized -lns3-dev-fd-net-device-optimized -lns3-dev-antenna-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-lte-optimized -lns3-dev-spectrum-optimized -lns3-dev-buildings-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-point-to-point-optimized -lns3-dev-csma-optimized -lns3-dev-antenna-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-applications-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-mesh
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-mesh-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-mesh-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-mesh-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -325,7 +382,7 @@ yes
 ------------------------------------------
 Checking for ns3-netanim
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-netanim-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-netanim-optimized -lns3-dev-wimax-optimized -lns3-dev-lte-optimized -lns3-dev-uan-optimized -lns3-dev-spectrum-optimized -lns3-dev-buildings-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-point-to-point-optimized -lns3-dev-applications-optimized -lns3-dev-csma-optimized -lns3-dev-fd-net-device-optimized -lns3-dev-antenna-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-energy-optimized -lns3-dev-wifi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-netanim-optimized -lns3-dev-wimax-optimized -lns3-dev-lte-optimized -lns3-dev-uan-optimized -lns3-dev-spectrum-optimized -lns3-dev-buildings-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-point-to-point-optimized -lns3-dev-csma-optimized -lns3-dev-antenna-optimized -lns3-dev-applications-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-energy-optimized -lns3-dev-internet-optimized -lns3-dev-wifi-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -337,7 +394,7 @@ yes
 ------------------------------------------
 Checking for ns3-olsr
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-olsr-optimized']
-out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -I/usr/include/harfbuzz -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-olsr-optimized -lns3-dev-point-to-point-optimized -lns3-dev-wifi-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-olsr-optimized -lns3-dev-point-to-point-optimized -lns3-dev-wifi-optimized -lns3-dev-csma-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-applications-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -349,11 +406,11 @@ to the PKG_CONFIG_PATH environment variable
 No package 'libns3-dev-openflow-optimized' found
 
 not found
-from /home/miyamoto/ndnSim/energyConsumption: The configuration failed
+from /home/user1/ndnSIM/energyConsumption: The configuration failed
 ------------------------------------------
 Checking for ns3-point-to-point-layout
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-point-to-point-layout-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-point-to-point-layout-optimized -lns3-dev-internet-optimized -lns3-dev-point-to-point-optimized -lns3-dev-mobility-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-point-to-point-layout-optimized -lns3-dev-netanim-optimized -lns3-dev-wimax-optimized -lns3-dev-lte-optimized -lns3-dev-uan-optimized -lns3-dev-spectrum-optimized -lns3-dev-buildings-optimized -lns3-dev-virtual-net-device-optimized -lns3-dev-point-to-point-optimized -lns3-dev-csma-optimized -lns3-dev-antenna-optimized -lns3-dev-applications-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-energy-optimized -lns3-dev-internet-optimized -lns3-dev-wifi-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -365,7 +422,7 @@ yes
 ------------------------------------------
 Checking for ns3-spectrum
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-spectrum-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-spectrum-optimized -lns3-dev-propagation-optimized -lns3-dev-antenna-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-spectrum-optimized -lns3-dev-propagation-optimized -lns3-dev-antenna-optimized -lns3-dev-applications-optimized -lns3-dev-mobility-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -377,7 +434,7 @@ yes
 ------------------------------------------
 Checking for ns3-tap-bridge
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-tap-bridge-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-tap-bridge-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-tap-bridge-optimized -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -389,13 +446,13 @@ yes
 ------------------------------------------
 Checking for ns3-uan
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-uan-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-uan-optimized -lns3-dev-energy-optimized -lns3-dev-wifi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-uan-optimized -lns3-dev-energy-optimized -lns3-dev-internet-optimized -lns3-dev-wifi-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-propagation-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
 Checking for ns3-virtual-net-device
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-virtual-net-device-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-virtual-net-device-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-virtual-net-device-optimized -lns3-dev-internet-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
 ------------------------------------------
@@ -413,6 +470,6 @@ yes
 ------------------------------------------
 Checking for ns3-wimax
 ['/usr/bin/pkg-config', '--cflags', '--libs', 'libns3-dev-wimax-optimized']
-out: -pthread -I/usr/include/ns3-dev  -Wl,-Bdynamic -lns3-dev-wimax-optimized -lns3-dev-point-to-point-optimized -lns3-dev-internet-optimized -lns3-dev-propagation-optimized -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
+out: -pthread -I/usr/include/ns3-dev -I/usr/include/gtk-2.0 -I/usr/lib/x86_64-linux-gnu/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libxml2  -Wl,-Bdynamic -lns3-dev-wimax-optimized -lns3-dev-point-to-point-optimized -lns3-dev-applications-optimized -lns3-dev-propagation-optimized -lns3-dev-internet-optimized -lns3-dev-config-store-optimized -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lglib-2.0 -lxml2 -lns3-dev-bridge-optimized -lns3-dev-mpi-optimized -lns3-dev-mobility-optimized -lns3-dev-network-optimized -lns3-dev-stats-optimized -lsqlite3 -lns3-dev-core-optimized -lrt -lgsl -lgslcblas -lm  
 
 yes
