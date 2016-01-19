@@ -43,14 +43,14 @@
 //               +---------+              +---------+
 //
 
-#include "ns3/core-module.h"
-#include "ns3/mobility-module.h"
-#include "ns3/applications-module.h"
-#include "ns3/wifi-module.h"
-#include "ns3/network-module.h"
-#include "ns3/csma-module.h"
-#include "ns3/internet-module.h"
-#include "ns3/bridge-helper.h"
+#include "ns3-dev/ns3/core-module.h"
+#include "ns3-dev/ns3/mobility-module.h"
+#include "ns3-dev/ns3/applications-module.h"
+#include "ns3-dev/ns3/wifi-module.h"
+#include "ns3-dev/ns3/network-module.h"
+#include "ns3-dev/ns3/csma-module.h"
+#include "ns3-dev/ns3/internet-module.h"
+#include "ns3-dev/ns3/bridge-helper.h"
 #include <vector>
 #include <stdint.h>
 #include <sstream>
@@ -64,12 +64,19 @@ int main (int argc, char *argv[])
   uint32_t nStas = 2;
   bool sendIp = true;
   bool writeMobility = false;
+  uint32_t users = 1;			    	  		// Number of mobile terminals
+  int csSize = 0;                      		// How big the Content Store should be (0/64/128/256)
+  char traffic[250] = "NormalTraffic";		// "NormalTraffic","HighTraffic", "LowTraffic"
+  double endTime = 300;                       // Number of seconds to run the simulation
+  bool traceFiles = false;                    // Tells to run the simulation with traceFiles
+  char results[250] = "results";              // Directory to place results
 
   CommandLine cmd;
   cmd.AddValue ("nWifis", "Number of wifi networks", nWifis);
   cmd.AddValue ("nStas", "Number of stations per wifi network", nStas);
   cmd.AddValue ("SendIp", "Send Ipv4 or raw packets", sendIp);
   cmd.AddValue ("writeMobility", "Write mobility trace", writeMobility);
+  cmd.AddValue ("trace", "Enable trace files", traceFiles);
   cmd.Parse (argc, argv);
 
   NodeContainer backboneNodes;
@@ -193,6 +200,62 @@ int main (int argc, char *argv[])
       AsciiTraceHelper ascii;
       MobilityHelper::EnableAsciiAll (ascii.CreateFileStream ("wifi-wired-bridging.mob"));
     }
+
+//  if (traceFiles) {
+//  		char filename[250];		// Filename
+//  		char fileId[250];		// File ID
+//
+//  		sprintf(results, "%s/%s/csSize_%d/MN_%d/endTime_%.0f", results, traffic, csSize ,users, endTime);
+//  		sprintf(filename, "%s/clients", results);
+//
+//  		std::ofstream clientFile;
+//
+//  		clientFile.open (filename);
+//  		for (int i = 0; i < mobileNodeIds.size(); i++)
+//  		{
+//  			clientFile << mobileNodeIds[i] << std::endl;
+//  		}
+//
+//  		clientFile.close();
+//
+//  		// Print server nodes to file
+//  		sprintf(filename, "%s/servers", results);
+//
+//  		std::ofstream serverFile;
+//
+//  		serverFile.open (filename);
+//  		for (int i = 0; i < serverNodeIds.size(); i++)
+//  		{
+//  			serverFile << serverNodeIds[i] << std::endl;
+//  		}
+//
+//  		serverFile.close();
+//
+//
+//
+//  		NS_LOG_INFO ("Installing tracers");
+//
+//  		// NDN Aggregate tracer
+//  		printf ("Result files are being written at %s\n", results);
+//  //		sprintf (filename, "%s/aggregate-trace", results);
+//  //		ndn::L3AggregateTracer::InstallAll(filename, Seconds (1.0));
+//
+//  		// NDN L3 tracer
+//  		sprintf (filename, "%s/rate-trace", results);
+//  		ndn::L3RateTracer::InstallAll (filename, Seconds (1.0));
+//
+//  		// NDN App Tracer
+//  		sprintf (filename, "%s/app-delays", results);
+//  		ndn::AppDelayTracer::InstallAll (filename);
+//
+//  		// L2 Drop rate tracer
+//  //		sprintf (filename, "%s/drop-trace", results);
+//  //		L2RateTracer::InstallAll (filename, Seconds (0.5));
+//
+//  		// Content Store tracer
+//  //		sprintf (filename, "%s/cs-trace", results);
+//  //		ndn::CsTracer::InstallAll (filename, Seconds (1));
+//  	}
 
   Simulator::Stop (Seconds (5.0));
   Simulator::Run ();
