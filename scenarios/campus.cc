@@ -155,15 +155,14 @@ int main (int argc, char *argv[])
 	std::cout << " ==== DARPA NMS CAMPUS NETWORK SIMULATION ====" << std::endl;
 	LogComponentEnable ("OnOffApplication", LOG_LEVEL_INFO);
 
-//    // These are our scenario arguments
+    // These are our scenario arguments
 	uint32_t contentsize = 102400; // Size in bytes of the content to transfer, 0.1Mbytes
 	int csSize = 0;                      		// How big the Content Store should be (0/64/128/256)
-	uint32_t clients = 1;//000; // Number of clients in the network	trial
-	//uint32_t servers = 1; // Number of servers in the network
-	//uint32_t networks = 1; // Number of additional nodes in the network
 	uint32_t NumberOfContents = 1000;				// Number of Contents
-	uint32_t intFreq = 297;							// Number of Intere Packet per second (High Traffic or Low Traffic)
+	char traffic[250] = "NormalTraffic";		// "NormalTraffic","HighTraffic", "LowTraffic"
 
+	double retxtime = 0.05;                     // How frequent Interest retransmission timeouts should be checked (seconds)
+	double endTime = 300;                       // Number of seconds to run the simulation
 	char results[250] = "results";
 	int nCN = 1, nLANClients = 10;//0;	trial
 	bool nix = true;
@@ -173,12 +172,19 @@ int main (int argc, char *argv[])
 	cmd.AddValue ("LAN", "Number of nodes per LAN [20]", nLANClients);
 	cmd.AddValue ("contents", "Size in bytes of the content to transfer",NumberOfContents);
 	cmd.AddValue ("ctS", "Size in bytes of the content to transfer",contentsize);
+	cmd.AddValue ("traffic", "\"NormalTraffic\",\"HighTraffic\", \"LowTraffic\"", traffic);
 	cmd.AddValue ("css", "Size in bytes of the content to transfer",csSize);
+	cmd.AddValue ("end", "How long the simulation will last (Seconds)", endTime);
 	cmd.AddValue ("NIX", "Toggle nix-vector routing", nix);
 	cmd.Parse (argc,argv);
 
-
-	std::cout << "Number of CNs: " << nCN << ", LAN nodes: " << nLANClients << std::endl;
+	uint32_t clients = nCN * nLANClients * 12;
+	uint32_t intFreq = 297;							// Number of Intere Packet per second (High Traffic or Low Traffic)
+	if(traffic == "HighTraffic") intFreq = 500;
+	else if(traffic == "LowTraffic") intFreq = 150;
+	else intFreq = 300;
+	cout << "endtime=" << endTime << "  clients=" << clients << "  traffic=" << traffic << "  intFreq=" << intFreq << endl;
+	cout << "Number of CNs: " << nCN << ", LAN nodes: " << nLANClients << std::endl;
 
 	Array2D<NodeContainer> nodes_net0(nCN, 3);
 //	Array2D<NodeContainer> nodes_net1(nCN, 6);
@@ -189,6 +195,11 @@ int main (int argc, char *argv[])
 	Array3D<NodeContainer> nodes_net3LAN(nCN, 5, nLANClients);
 	NodeContainer consumers;
 	NodeContainer producers;
+	NodeContainer routesrs;
+	NodeContainer level1;
+	NodeContainer level2;
+	NodeContainer level3;
+	NodeContainer level4;
 
 	PointToPointHelper p2p_1gb5ms, p2p_2gb200ms, p2p_100mb1ms;
     //;
@@ -236,6 +247,7 @@ int main (int argc, char *argv[])
         			stack.Install (nodes_net0[z][i]);
         		}
 
+        		level4.Add (nodes_net0[z][1].Get (0));
         		nodes_net0[z][0].Add (nodes_net0[z][1].Get (0));
         		nodes_net0[z][1].Add (nodes_net0[z][2].Get (0));
         		nodes_net0[z][2].Add (nodes_net0[z][0].Get (0));
@@ -288,8 +300,12 @@ int main (int argc, char *argv[])
         		{
         			nodes_net2[z][i].Create (1);
         			stack.Install(nodes_net2[z][i]);
+        			if (i<2)         		{ level3.Add (nodes_net2[z][i].Get (0)); }
+        			else if (i<7)     { level2.Add (nodes_net2[z][i].Get (0)); }
+        			else 					{ level1.Add (nodes_net2[z][i].Get (0)); }
         		}
 
+//        		cout << "level3: " << nodes_net2[z][1].Get (0)->GetId() << endl; //trial
         		nodes_net2[z][0].Add (nodes_net2[z][1].Get (0));
         		nodes_net2[z][2].Add (nodes_net2[z][0].Get (0));
         		nodes_net2[z][1].Add (nodes_net2[z][3].Get (0));
@@ -334,6 +350,9 @@ int main (int argc, char *argv[])
         		{
         			nodes_net3[z][i].Create (1);
         			stack.Install (nodes_net3[z][i]);
+        			if (i==1)         	{ level3.Add (nodes_net2[z][i].Get (0)); }
+        			else if (i>3)     { level1.Add (nodes_net2[z][i].Get (0)); }
+        			else 					{ level2.Add (nodes_net2[z][i].Get (0)); }
         		}
 
         		nodes_net3[z][0].Add (nodes_net3[z][1].Get (0));
@@ -375,6 +394,9 @@ int main (int argc, char *argv[])
         		stack.Install (nodes_netLR[z]);
         		NetDeviceContainer ndcLR;
         		ndcLR = p2p_1gb5ms.Install (nodes_netLR[z]);
+        		level4.Add (nodes_netLR[z].Get (0));
+        		level3.Add (nodes_netLR[z].Get (1));
+//        		cout << "level3: " << nodes_netLR[z].Get (1)->GetId() << endl; //trial
 
         		// Connect Net2/Net3 through Lone Routers to Net0
         		NodeContainer net0_4, net0_5, net2_4a, net2_4b, net3_5a, net3_5b;
@@ -506,6 +528,7 @@ int main (int argc, char *argv[])
     std::vector<uint32_t> cdNodeIds;
 
 	odNodes.Add(nodes_net0[0][0].Get (0));
+	odNodes.Add(nodes_net0[0][0].Get (1));
 	//odNodeIds.push_back(server_nodeNum);
 	std::cout << "  Getinng odNodes" << std::endl;
 //	/*
@@ -570,7 +593,10 @@ int main (int argc, char *argv[])
 		// Consumer will request /prefix/0, /prefix/1, ...
 		consumerHelper1.SetPrefix ("/OD/CD");
 		consumerHelper1.SetAttribute ("Frequency", StringValue ("10")); // 10 interests a second
-		consumerHelper1.SetAttribute ("MaxSeq", IntegerValue (100));
+		consumerHelper1.SetAttribute ("MaxSeq", IntegerValue (10000));
+		consumerHelper1.SetAttribute ("Randomize", StringValue("exponential"));
+		consumerHelper1.SetAttribute ("RetxTimer", TimeValue (Seconds(retxtime)));
+		consumerHelper1.SetAttribute ("StopTime", TimeValue (Seconds(endTime)));
 		consumerHelper1.SetAttribute ("NumberOfContents", UintegerValue(NumberOfContents));
 		//consumerHelper.Install (nodes.Get (12)); // first node
 		for(int i =0; i<7; i++){
@@ -603,7 +629,7 @@ int main (int argc, char *argv[])
 		producerHelper1.SetPrefix ("/OD/CD");
 		producerHelper1.SetAttribute ("PayloadSize", StringValue("1024"));
 		//producerHelper.Install (nodes.Get (2)); // last node
-		producerHelper1.Install (odNodes);
+		producerHelper1.Install (odNodes.Get(1));
 		std::cout << "Install producerHelper1" << std::endl;
 
 //	// Producer2
@@ -624,9 +650,11 @@ int main (int argc, char *argv[])
 //		std::cout << "Install producerHelper2" << std::endl;
 
 	ndn::StackHelper ndnHelper;
+//	ndnHelper.SetContentStore("ns3::ndn::cs::Freshness::Lru","MaxSize","3072");// 30% of whole contents
 	ndnHelper.SetContentStore("ns3::ndn::cs::Freshness::Lru","MaxSize","3072");// 30% of whole contents
 	ndnHelper.SetForwardingStrategy ("ns3::ndn::fw::BestRoute");
 	ndnHelper.InstallAll ();
+//	ndnHelper.Install ();
 	ndn::GlobalRoutingHelper ndnGlobalRoutingHelper;
 	ndnGlobalRoutingHelper.InstallAll ();
 	ndnGlobalRoutingHelper.AddOrigins ("/OD/CD", nodes_net0[0][0].Get (0));
@@ -646,8 +674,30 @@ int main (int argc, char *argv[])
 
 	// Obtain metrics
 	char filename[250];
+
+	;
+	sprintf(results, "%s/%s_csSize_%d_MN_%d_endTime_%.0f", results, traffic, csSize, clients, endTime);
+
+	// NDN L3 tracer
+	sprintf (filename, "%s_rate-trace_level1", results);
+	ndn::L3RateTracer::Install (level1, filename, Seconds (1.0));
+	sprintf (filename, "%s_rate-trace_level2", results);
+	ndn::L3RateTracer::Install (level2, filename, Seconds (1.0));
+	sprintf (filename, "%s_rate-trace_level3", results);
+	ndn::L3RateTracer::Install (level3, filename, Seconds (1.0));
+	sprintf (filename, "%s_rate-trace_level4", results);
+	ndn::L3RateTracer::Install (level4, filename, Seconds (1.0));
+	sprintf (filename, "%s_rate-trace_servers", results);
+	ndn::L3RateTracer::Install (odNodes, filename, Seconds (1.0));
+
+	// NDN App Tracer
+	sprintf (filename, "%s_app-delays", results);
+	ndn::AppDelayTracer::InstallAll (filename);
+
 	sprintf (filename, "%s/campus-rate-trace-%03d.txt", results, clients);
 	ndn::L3RateTracer::InstallAll (filename, Seconds (1.0));
+
+	ndn::CsTracer::InstallAll("results/cs-trace.txt", Seconds(1));
 	/*
 	 * sprintf (filename, "%s/smart-grid-ccn-cd-rate-trace-1-1-%03d-102400.txt", results, clients);
 	for(int i =0; i<7; i++){
@@ -662,10 +712,10 @@ int main (int argc, char *argv[])
 		}
 
 	 */
-	Simulator::Stop (Seconds (20.0));
-	// The failure of the link connecting consumer and router will start from seconds 10.0 to 15.0
-	Simulator::Schedule(Seconds(7.0), ndn::LinkControlHelper::FailLink, global.Get(3), global.Get(4));
-	Simulator::Schedule(Seconds(9.0), ndn::LinkControlHelper::UpLink, global.Get(3), global.Get(4));
+
+	Simulator::Schedule(Seconds(0.0), ndn::LinkControlHelper::FailLink, global.Get(87), global.Get(147));
+	Simulator::Schedule(Seconds(5.0), ndn::LinkControlHelper::UpLink, global.Get(87), global.Get(147));
+	Simulator::Stop (Seconds (endTime+1));
 	Simulator::Run ();
 	Simulator::Destroy ();
 	return 0;
