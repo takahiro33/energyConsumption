@@ -5,25 +5,15 @@ WAF=${WAFDIR}waf
 
 mkdir results/
 mkdir results/graphs/
-mkdir results/NormalTraffic/
 
 for  csSize in 0 64 128 256
 do
-
-
-mkdir results/NormalTraffic/csSize_$csSize/
-
-
-for mobile in 2 6 10 14
-do
-
-mkdir results/NormalTraffic/csSize_$csSize/MN_$mobile
-
-# Creat Directries for trace files
-echo "run $WAF --run \"wifi -csSize=$csSize -smart -mobile=$mobile -trace\""
-$WAF --run "wifi -csSize=$csSize -smart -mobile=$mobile -trace"
-
+    for consumer in 4 6 10 15 20 
+    do
+	for intFreq in 50 150 300
+	do	   
+	    echo "run $WAF --run \"campus --intFreq=$intFreq --contents=100000 --css=$csSize  --LAN=$consumer\""
+	    $WAF --run "campus --intFreq=$intFreq --contents=100 --css=$csSize --LAN=$consumer"
+	done
+    done		
 done
-
-done
-		

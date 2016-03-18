@@ -57,6 +57,9 @@ main(int argc, char* argv[])
   topologyReader.SetFileName("scenarios/topo-grid-3x3.txt");
   topologyReader.Read();
 
+  int servers = 2;
+	NodeContainer serverNodes;
+	serverNodes.Create (servers);
   // Install NDN stack on all nodes
   ndn::StackHelper ndnHelper;
   ndnHelper.SetForwardingStrategy("ns3::ndn::fw::BestRoute::PerOutFaceLimits", "Limit", "ns3::ndn::Limits::Window");

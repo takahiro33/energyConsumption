@@ -156,35 +156,41 @@ int main (int argc, char *argv[])
 	LogComponentEnable ("OnOffApplication", LOG_LEVEL_INFO);
 
     // These are our scenario arguments
-	uint32_t contentsize = 102400; // Size in bytes of the content to transfer, 0.1Mbytes
-	int csSize = 0;                      		// How big the Content Store should be (0/64/128/256)
-	uint32_t NumberOfContents = 1000;				// Number of Contents
-	char traffic[250] = "NormalTraffic";		// "NormalTraffic","HighTraffic", "LowTraffic"
+//	uint32_t contentsize = 102400;				 			// Size in bytes of the content to transfer, 0.1Mbytes
+	int csSize = 64;                      								// How big the Content Store should be (0/64/128/256)
+	uint32_t NumberOfContents = 10000;				// Number of Contents
+	int maxSeq = 1000;                           					// Maximum number of Data packets to request
+	char traffic[250];													// "NormalTraffic","HighTraffic", "LowTraffic"
+	int intFreq = 200;
 
-	double retxtime = 0.05;                     // How frequent Interest retransmission timeouts should be checked (seconds)
-	double endTime = 300;                       // Number of seconds to run the simulation
+	double retxtime = 0.05;                    					// How frequent Interest retransmission timeouts should be checked (seconds)
+	double endTime = 60;                       					// Number of seconds to run the simulation
 	char results[250] = "results";
-	int nCN = 1, nLANClients = 10;//0;	trial
+	int nCN = 1, nLANClients = 10;
 	bool nix = true;
+
+	// Variable for buffer
+	char buffer[250];
 
 	CommandLine cmd;
 	cmd.AddValue ("CN", "Number of total CNs [1]", nCN);
 	cmd.AddValue ("LAN", "Number of nodes per LAN [20]", nLANClients);
 	cmd.AddValue ("contents", "Size in bytes of the content to transfer",NumberOfContents);
-	cmd.AddValue ("ctS", "Size in bytes of the content to transfer",contentsize);
-	cmd.AddValue ("traffic", "\"NormalTraffic\",\"HighTraffic\", \"LowTraffic\"", traffic);
+//	cmd.AddValue ("ctS", "Size in bytes of the content to transfer",contentsize);
+	cmd.AddValue ("intFreq", "\"Normal\",\"High\", \"Low\"", intFreq);
 	cmd.AddValue ("css", "Size in bytes of the content to transfer",csSize);
 	cmd.AddValue ("end", "How long the simulation will last (Seconds)", endTime);
 	cmd.AddValue ("NIX", "Toggle nix-vector routing", nix);
 	cmd.Parse (argc,argv);
 
 	uint32_t clients = nCN * nLANClients * 12;
-	uint32_t intFreq = 297;							// Number of Intere Packet per second (High Traffic or Low Traffic)
-	if(traffic == "HighTraffic") intFreq = 500;
-	else if(traffic == "LowTraffic") intFreq = 150;
-	else intFreq = 300;
-	cout << "endtime=" << endTime << "  clients=" << clients << "  traffic=" << traffic << "  intFreq=" << intFreq << endl;
+
+	if(intFreq > 200) sprintf (traffic, "High");
+	else if(intFreq < 100) sprintf (traffic, "Low");
+	else sprintf (traffic, "Normal");
+	cout << "end Time=" << endTime << "  clients=" << clients << "  traffic=" << traffic << "  intFreq=" << intFreq << endl;
 	cout << "Number of CNs: " << nCN << ", LAN nodes: " << nLANClients << std::endl;
+	cout << "cash size=: " << csSize << std::endl;
 
 	Array2D<NodeContainer> nodes_net0(nCN, 3);
 //	Array2D<NodeContainer> nodes_net1(nCN, 6);
@@ -202,7 +208,6 @@ int main (int argc, char *argv[])
 	NodeContainer level4;
 
 	PointToPointHelper p2p_1gb5ms, p2p_2gb200ms, p2p_100mb1ms;
-    //;
 	InternetStackHelper stack;
 
 	Ipv4InterfaceContainer ifs;
@@ -217,8 +222,8 @@ int main (int argc, char *argv[])
 	std::ostringstream oss;
 	p2p_1gb5ms.SetDeviceAttribute ("DataRate", StringValue ("1Gbps"));
 	p2p_1gb5ms.SetChannelAttribute ("Delay", StringValue ("5ms"));
-	p2p_2gb200ms.SetDeviceAttribute ("DataRate", StringValue ("2Gbps"));
-	p2p_2gb200ms.SetChannelAttribute ("Delay", StringValue ("200ms"));
+//	p2p_2gb200ms.SetDeviceAttribute ("DataRate", StringValue ("2Gbps"));
+//	p2p_2gb200ms.SetChannelAttribute ("Delay", StringValue ("200ms"));
 	p2p_100mb1ms.SetDeviceAttribute ("DataRate", StringValue ("100Mbps"));
 	p2p_100mb1ms.SetChannelAttribute ("Delay", StringValue ("1ms"));
 
@@ -252,7 +257,6 @@ int main (int argc, char *argv[])
         		nodes_net0[z][1].Add (nodes_net0[z][2].Get (0));
         		nodes_net0[z][2].Add (nodes_net0[z][0].Get (0));
         		NetDeviceContainer ndc0[3];
-
         		for (int i = 0; i < 3; ++i)
         		{
         			ndc0[i] = p2p_1gb5ms.Install (nodes_net0[z][i]);
@@ -350,9 +354,9 @@ int main (int argc, char *argv[])
         		{
         			nodes_net3[z][i].Create (1);
         			stack.Install (nodes_net3[z][i]);
-        			if (i==1)         	{ level3.Add (nodes_net2[z][i].Get (0)); }
-        			else if (i>3)     { level1.Add (nodes_net2[z][i].Get (0)); }
-        			else 					{ level2.Add (nodes_net2[z][i].Get (0)); }
+        			if (i==1)         	{ level3.Add (nodes_net3[z][i].Get (0)); }
+        			else if (i>3)     { level1.Add (nodes_net3[z][i].Get (0)); }
+        			else 					{ level2.Add (nodes_net3[z][i].Get (0)); }
         		}
 
         		nodes_net3[z][0].Add (nodes_net3[z][1].Get (0));
@@ -396,7 +400,7 @@ int main (int argc, char *argv[])
         		ndcLR = p2p_1gb5ms.Install (nodes_netLR[z]);
         		level4.Add (nodes_netLR[z].Get (0));
         		level3.Add (nodes_netLR[z].Get (1));
-//        		cout << "level3: " << nodes_netLR[z].Get (1)->GetId() << endl; //trial
+        		cout << "level3: " << nodes_netLR[z].Get (1)->GetId() << endl;
 
         		// Connect Net2/Net3 through Lone Routers to Net0
         		NodeContainer net0_4, net0_5, net2_4a, net2_4b, net3_5a, net3_5b;
@@ -493,8 +497,8 @@ int main (int argc, char *argv[])
         		}
         		std::cout << "  Net3 IP Addresses Assigned" << std::endl;
 	}
-	// Create Ring Links
 
+	// Create Ring Links
 	if (nCN > 1)
 	{
 		std::cout << "Forming Ring Topology..." << std::endl;
@@ -520,165 +524,99 @@ int main (int argc, char *argv[])
 	}
 
 	NodeContainer global = NodeContainer::GetGlobal ();
-	//OperationDomainNodes
-    NodeContainer odNodes;
+
+	NodeContainer odNodes;
 	std::vector<uint32_t> odNodeIds;
-	//CustomerDomainNodes
-    NodeContainer cdNodes;
-    std::vector<uint32_t> cdNodeIds;
-
 	odNodes.Add(nodes_net0[0][0].Get (0));
-	odNodes.Add(nodes_net0[0][0].Get (1));
-	//odNodeIds.push_back(server_nodeNum);
+	odNodes.Add(nodes_net0[0][2].Get (0));
 	std::cout << "  Getinng odNodes" << std::endl;
-//	/*
-//	for (uint32_t i=7; i<14; i++){
-//	     for (uint32_t j=0; j<nLANClients;j++){
-//	          Ptr<Node> tmp = nodes_net2LAN[0][i][j].Get(0);
-//	          uint32_t nodeNum = tmp ->GetId();
-//	          cdNodes.Add(tmp);
-//	          cdNodeIds.push_back(nodeNum);
-//
-//	      }
-//	}
-//	std::cout << "  Getinng net2LAN  Nodes into clientNodes" << std::endl;
-//	for (uint32_t i=4; i<9; i++){
-//	     for (uint32_t j=0; j<nLANClients;j++){
-//	          Ptr<Node> tmp = nodes_net3LAN[0][i][j].Get(0);
-//	          uint32_t nodeNum = tmp ->GetId();
-//	          cdNodes.Add(tmp);
-//	          cdNodeIds.push_back(nodeNum);
-//	      }
-//	}
-//	std::cout << "  Getinng net2LAN & net3LAN Nodes into clientNodes" << std::endl;
-//	*/
-//
-//    // Add edgeNodes into CustomerDomainNodes
-//
-//    /*
-//      for(uint32_t i = 7;i < 14;i++){
-//    	for (uint32_t j = 0;j < nLANClients; ++j){
-//    		 uint32_t nodeNum =nodes_net2LAN[0][i][j].Get(0)->GetId();
-//    		 std::cout << "  Getinng net2LAN & net3LAN Nodes into clientNodes" << std::endl;
-//    		 cdNodes.Add(global.Get(nodeNum));
-//    		 cdNodeIds.push_back(nodeNum);
-//
-//    	}
-//    }
-//
-//    for(uint32_t i = 4;i < 9;i++){
-//    	for (uint32_t j = 0;j < nLANClients; ++j){
-//    		 uint32_t nodeNum =nodes_net3LAN[0][i][j].Get(0)->GetId();
-//    		 cdNodeIds.push_back(nodeNum);
-//    	}
-//    }
-//    std::cout << "  Getinng net2LAN & net3LAN Nodes into cdNodes" << std::endl;
-//
-//     */
-//
-//
-//    /*
-//	for (uint32_t i = 0; i < 200; i++){
-//			Ptr<Node> tmp = cdNodes[i];
-//			uint32_t nodeNum = tmp->GetId();
-//			cdNodeIds.push_back(nodeNum);
-//	}
-//	*/
-//	//Ptr<Node> server_tmp = nodes_net0[0][0].Get (0);
-//	        //uint32_t server_nodeNum = server_tmp->GetId();
 
+	// Consumer helper settings
 	// Consumer1
-//		ndn::AppHelper consumerHelper1 ("ns3::ndn::ConsumerCbr");
-		ndn::AppHelper consumerHelper1 ("ns3::ndn::ConsumerZipfMandelbrot");
-		// Consumer will request /prefix/0, /prefix/1, ...
-		consumerHelper1.SetPrefix ("/OD/CD");
-		consumerHelper1.SetAttribute ("Frequency", StringValue ("10")); // 10 interests a second
-		consumerHelper1.SetAttribute ("MaxSeq", IntegerValue (10000));
-		consumerHelper1.SetAttribute ("Randomize", StringValue("exponential"));
-		consumerHelper1.SetAttribute ("RetxTimer", TimeValue (Seconds(retxtime)));
-		consumerHelper1.SetAttribute ("StopTime", TimeValue (Seconds(endTime)));
-		consumerHelper1.SetAttribute ("NumberOfContents", UintegerValue(NumberOfContents));
-		//consumerHelper.Install (nodes.Get (12)); // first node
-		for(int i =0; i<7; i++){
-			for (int j=0; j <nLANClients; j++){
-//				consumerHelper1.Install (nodes_net2LAN[0][i][j]);
-				consumers.Add(nodes_net2LAN[0][i][j]);
-			}
-		}
-		for(int i =0; i<5; i++){
-			for (int j=0; j <nLANClients; j++){
-				consumers.Add(nodes_net3LAN[0][i][j]);
-//				consumerHelper1.Install (nodes_net3LAN[0][i][j]);
-			}
-		}
-		consumerHelper1.Install (consumers);
-		std::cout << "Install consumerHelper1" << std::endl;
+	ndn::AppHelper consumerHelper1 ("ns3::ndn::ConsumerZipfMandelbrot");
+	consumerHelper1.SetPrefix ("/OD/CD");
+	consumerHelper1.SetAttribute ("Frequency", DoubleValue(intFreq)); // 10 interests a second
+	consumerHelper1.SetAttribute ("MaxSeq", IntegerValue (maxSeq));
+	consumerHelper1.SetAttribute ("Randomize", StringValue("exponential"));
+	consumerHelper1.SetAttribute ("q", DoubleValue (0));
+	consumerHelper1.SetAttribute ("RetxTimer", TimeValue (Seconds(retxtime)));
+	consumerHelper1.SetAttribute ("NumberOfContents", UintegerValue(NumberOfContents));
 
-//	// Consumer2
-//		ndn::AppHelper consumerHelper2 ("ns3::ndn::ConsumerCbr");
-//		// Consumer will request /prefix/0, /prefix/1, ...
-//		consumerHelper2.SetPrefix ("/CD/OD");
-//		consumerHelper2.SetAttribute ("Frequency", StringValue ("10")); // 10 interests a second
-//		//consumerHelper.Install (nodes.Get (12)); // first node
-//		consumerHelper2.Install (odNodes);
-//		std::cout << "Install consumerHelper2" << std::endl;
+	for(int i =0; i<7; i++){
+		for (int j=0; j*2+1 <nLANClients; j++){
+			consumerHelper1.Install (nodes_net2LAN[0][i][j*2+1]);
+			consumers.Add(nodes_net2LAN[0][i][j*2+1]);
+		}
+	}
+	for(int i =0; i<5; i++){
+		for (int j=0; j *2+1<nLANClients; j++){
+			consumerHelper1.Install (nodes_net3LAN[0][i][j*2+1]);
+			consumers.Add(nodes_net3LAN[0][i][j*2+1]);
+		}
+	}
+	std::cout << "Install consumerHelper1" << std::endl;
 
+	// Consumer2
+	ndn::AppHelper consumerHelper2 ("ns3::ndn::ConsumerZipfMandelbrot");
+	consumerHelper2.SetPrefix ("/CD/OD");
+	consumerHelper2.SetAttribute ("Frequency", DoubleValue(intFreq/2)); // 10 interests a second
+	consumerHelper2.SetAttribute ("MaxSeq", IntegerValue (maxSeq));
+	consumerHelper2.SetAttribute ("Randomize", StringValue("exponential"));
+	consumerHelper2.SetAttribute ("q", DoubleValue (0));
+	consumerHelper2.SetAttribute ("RetxTimer", TimeValue (Seconds(retxtime)));
+	consumerHelper2.SetAttribute ("NumberOfContents", UintegerValue(NumberOfContents));
+	for(int i =0; i<7; i++){
+				for (int j=0; j*2 <nLANClients; j++){
+					consumerHelper2.Install (nodes_net2LAN[0][i][j*2]);
+					consumers.Add(nodes_net2LAN[0][i][j*2]);
+				}
+			}
+	for(int i =0; i<5; i++){
+		for (int j=0; j*2 <nLANClients; j++){
+			consumerHelper2.Install (nodes_net3LAN[0][i][j*2]);
+			consumers.Add(nodes_net3LAN[0][i][j*2]);
+		}
+	}
+
+	std::cout << "Install consumerHelper2" << std::endl;
+
+
+	// Producer Helper settings
 	// Producer1
-		ndn::AppHelper producerHelper1 ("ns3::ndn::Producer");
-		// Producer will reply to all requests starting with /prefix
-		producerHelper1.SetPrefix ("/OD/CD");
-		producerHelper1.SetAttribute ("PayloadSize", StringValue("1024"));
-		//producerHelper.Install (nodes.Get (2)); // last node
-		producerHelper1.Install (odNodes.Get(1));
-		std::cout << "Install producerHelper1" << std::endl;
+	ndn::AppHelper producerHelper1 ("ns3::ndn::Producer");
+	producerHelper1.SetPrefix ("/OD/CD");
+	producerHelper1.SetAttribute ("PayloadSize", StringValue("1024"));
+	producerHelper1.Install (odNodes.Get(1));
+	std::cout << "Install producerHelper1" << std::endl;
 
-//	// Producer2
-//		ndn::AppHelper producerHelper2 ("ns3::ndn::Producer");
-//		// Producer will reply to all requests starting with /prefix
-//		producerHelper2.SetPrefix ("/CD/OD");
-//		producerHelper2.SetAttribute ("PayloadSize", StringValue("1024"));
-//		for(int i =0; i<7; i++){
-//			for (int j=0; j <nLANClients; j++){
-//						producerHelper2.Install (nodes_net2LAN[0][i][j]);
-//			}
-//		}
-//		for(int i =0; i<5; i++){
-//			for (int j=0; j <nLANClients; j++){
-//					producerHelper2.Install (nodes_net3LAN[0][i][j]);
-//			}
-//		}
-//		std::cout << "Install producerHelper2" << std::endl;
+	// Producer2
+	ndn::AppHelper producerHelper2 ("ns3::ndn::Producer");
+	producerHelper2.SetPrefix ("/CD/OD");
+	producerHelper2.SetAttribute ("PayloadSize", StringValue("1024"));
+	producerHelper2.Install (odNodes.Get(0));
+	std::cout << "Install producerHelper2" << std::endl;
+
 
 	ndn::StackHelper ndnHelper;
-//	ndnHelper.SetContentStore("ns3::ndn::cs::Freshness::Lru","MaxSize","3072");// 30% of whole contents
-	ndnHelper.SetContentStore("ns3::ndn::cs::Freshness::Lru","MaxSize","3072");// 30% of whole contents
+	sprintf(buffer,"%d", csSize);
+	ndnHelper.SetContentStore("ns3::ndn::cs::Freshness::Lru","MaxSize",buffer);// 15% of whole contents
 	ndnHelper.SetForwardingStrategy ("ns3::ndn::fw::BestRoute");
 	ndnHelper.InstallAll ();
-//	ndnHelper.Install ();
+
 	ndn::GlobalRoutingHelper ndnGlobalRoutingHelper;
 	ndnGlobalRoutingHelper.InstallAll ();
-	ndnGlobalRoutingHelper.AddOrigins ("/OD/CD", nodes_net0[0][0].Get (0));
+	ndnGlobalRoutingHelper.AddOrigins ("/OD/CD", odNodes.Get (1));
+	ndnGlobalRoutingHelper.AddOrigins ("/CD/OD", odNodes.Get (0));
 	ndn::GlobalRoutingHelper::CalculateRoutes ();
-//	for(int i =0; i<7; i++){
-//		for (int j=0; j <nLANClients; j++){
-//			ndnGlobalRoutingHelper.AddOrigins ("/CD/OD", nodes_net2LAN[0][i][j]);
-//		}
-//	}
-//	for(int i =0; i<5; i++){
-//		for (int j=0; j <nLANClients; j++){
-//			ndnGlobalRoutingHelper.AddOrigins ("/CD/OD", nodes_net3LAN[0][i][j]);
-//		}
-//	}
 	std::cout << "  Global Routing " << std::endl;
 
 
 	// Obtain metrics
 	char filename[250];
 
-	;
 	sprintf(results, "%s/%s_csSize_%d_MN_%d_endTime_%.0f", results, traffic, csSize, clients, endTime);
 
-	// NDN L3 tracer
+	// NDN L3 tracer for each level
 	sprintf (filename, "%s_rate-trace_level1", results);
 	ndn::L3RateTracer::Install (level1, filename, Seconds (1.0));
 	sprintf (filename, "%s_rate-trace_level2", results);
@@ -694,27 +632,8 @@ int main (int argc, char *argv[])
 	sprintf (filename, "%s_app-delays", results);
 	ndn::AppDelayTracer::InstallAll (filename);
 
-	sprintf (filename, "%s/campus-rate-trace-%03d.txt", results, clients);
-	ndn::L3RateTracer::InstallAll (filename, Seconds (1.0));
-
-	ndn::CsTracer::InstallAll("results/cs-trace.txt", Seconds(1));
-	/*
-	 * sprintf (filename, "%s/smart-grid-ccn-cd-rate-trace-1-1-%03d-102400.txt", results, clients);
-	for(int i =0; i<7; i++){
-			for (int j=0; j <nLANClients; j++){
-				ndn::L3RateTracer::Install(nodes_net2LAN[0][i][j],filename, Seconds (0.5));
-			}
-		}
-		for(int i =0; i<5; i++){
-			for (int j=0; j <nLANClients; j++){
-				ndn::L3RateTracer::Install(nodes_net3LAN[0][i][j],filename, Seconds (0.5));
-			}
-		}
-
-	 */
-
-	Simulator::Schedule(Seconds(0.0), ndn::LinkControlHelper::FailLink, global.Get(87), global.Get(147));
-	Simulator::Schedule(Seconds(5.0), ndn::LinkControlHelper::UpLink, global.Get(87), global.Get(147));
+//	Simulator::Schedule(Seconds(0.0), ndn::LinkControlHelper::FailLink, global.Get(87), global.Get(147));
+//	Simulator::Schedule(Seconds(5.0), ndn::LinkControlHelper::UpLink, global.Get(87), global.Get(147));
 	Simulator::Stop (Seconds (endTime+1));
 	Simulator::Run ();
 	Simulator::Destroy ();
